@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Form Recovery</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 12px;
+      min-width: 250px;
+      background-color: #ffffff;
+      color: #333333;
+    }
+    h1 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #333333;
+    }
+    #info {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    #domain-section {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    #domain-section p {
+      margin: 4px 0;
+    }
+    #domain-section label {
+      display: flex;
+      align-items: center;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    #domain-section label input {
+      margin-right: 6px;
+    }
+    button {
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      margin-top: 8px;
+      transition: background-color 0.2s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #66bb6a;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #status {
+      font-size: 13px;
+      color: #555555;
+      margin-top: 6px;
+    }
+
+    /* settings view overrides */
+    #settingsView label {
+      display: block;
+      margin: 8px 0 4px;
+      font-weight: bold;
+      color: #333333;
+    }
+    #settingsView input[type="text"],
+    #settingsView input[type="number"],
+    #settingsView textarea {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+      background-color: #f9f9f9;
+      color: #333333;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+    }
+    #settingsView textarea {
+      resize: vertical;
+    }
+    #settingsView .toggle {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+    #settingsView .toggle input {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="homeView">
+    <h1>Auto Form Recovery</h1>
+    <div id="info">Saved forms: <span id="count">0</span></div>
+    <div id="domain-section">
+      <p><strong>Current site:</strong> <span id="domainName">–</span></p>
+      <label><input type="checkbox" id="ignoreDomainToggle"> Disable on this site</label>
+      <button id="clearSiteBtn">Clear data for this site</button>
+    </div>
+    <button id="openSettingsBtn">Settings</button>
+    <button id="clearBtn">Clear all data</button>
+    <div id="status"></div>
+  </div>
+  <div id="settingsView" style="display:none;">
+    <div id="settingsHeader" style="display:flex; align-items:center; margin-bottom:8px;">
+      <button id="backToHome" style="background:none;border:none;color:#4caf50;font-size:18px;cursor:pointer;padding:0;margin-right:8px;">←</button>
+      <h1 style="font-size:16px;margin:0;">Settings</h1>
+    </div>
+    <div class="toggle">
+      <input type="checkbox" id="popupEnabled">
+      <label for="popupEnabled">Enable Auto Form Recovery</label>
+    </div>
+    <label for="popupRetentionDays">Retention period (days)</label>
+    <input type="number" id="popupRetentionDays" min="1" max="365" step="1">
+    <label for="popupIgnoreDomains">Ignore on domains (comma‑separated)</label>
+    <textarea id="popupIgnoreDomains" placeholder="example.com, private-site.org" style="height:60px;"></textarea>
+    <div class="toggle">
+      <input type="checkbox" id="popupIgnoreLoginForms">
+      <label for="popupIgnoreLoginForms">Ignore sign‑in forms</label>
+    </div>
+    <button id="popupSaveBtn">Save Settings</button>
+    <div id="popupStatus" style="margin-top:6px;font-size:13px;color:#555555;"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
